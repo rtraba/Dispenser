@@ -35,9 +35,16 @@ I decided to use a bidimentional array for keeping track of all limits, month by
 Limits array has been implemente as a bidimentional combined sized array, dinamyc in years and fixed is months. Considering that there ar no certainty about the number of years that could be needed, but it is well known that every single year should use all available months.
 All artimethics are acalulated using SafeMath library in order to avoid overflows. 
 
-## Finalizing the dispensing period
+## Finalizing the dispensing period and releasing funds
 A beneficiary can only interact with the contract using calimFunds function. The dispensing period can be finalazid by owner, or in the normal case it will terminate just because of beneficiary runing claimFunds ot the period. Dispenser contrac checks how much time passed between contract creation time and current function execution. That way, when dispenser detects the feris claiming funds out of time, it just finilaze the contract and transfers all remaining DSP to beneficiary.  
 If the contract is finilazed by owner, then owner's address is the recipient of the last transfer from Dispenser.
+
+## Events
+There are fousr events produced after relevant state changes:
+- dispenserPeriodFinilized: emited when the dispensing period ends normally.
+- dispenserPeriodFinilizedByOwner: emited when the dispensing period ends forced by owner.
+- fundsClaimed: emited every time that the beneficiary executes succefully withdrwals.
+- newBeneficiary: emited when owner changes beneficciary address. 
 
 ## Potential improvements:
 - Multiplle beneficiaries: the contract could be implemented to support a beneficaries whitelist intead of just one beneficiary address. This should be decoupled from the Dispenser entrypoint contract.
