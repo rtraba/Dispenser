@@ -30,12 +30,10 @@ This solution has been implemented to prevent inconsistent deployments. If you t
 This means you can also use thi contract for deploying diferent dispensing periodsn and work on diferen dispensed tokens.
 
 ## Design decisions
-Dispenser token implement
-The initial requirements for unlocking shcedule has been very precise. There are not requirements or previsibility for changing that schedule or the token or the beneficiary address. This solutions is being deployed for demonstrations porpouses only. So if there is no reason to change in smart contract, by default there are allways security reasons to make it in inflexible. 
- If something doesn't need to change, then it should be unchangable.
-
-Considering previously described scenario, I desided to use a bidimentional array for keeping track of all limits, month by month. This results in a considerable increasing gas cots during deployment, but it allows the Dispenser contract to easly know the limits available for every month in the entire Dispensing period, not just current, but previous and future months too. I consider that capability to be an improvment regarding auditability.
-Limits array has been implementes as a bidimentional combined sized array, dinamyc in years and fixed is months. Considering that there ar no certainty about the number of years that could be needed, but it is well known that every single year should use all available months.
+The initial requirements for unlocking shcedule has been very precise. There are not requirements or previsibility for changing that schedule or the token or the beneficiary address. This solutions is being deployed for demonstrations porpouses only.
+I decided to use a bidimentional array for keeping track of all limits, month by month. This results in a considerable increasing gas cots during deployment, but it allows the Dispenser contract to easly know the limits available for every month in the entire Dispensing period, not just current, but previous and future months too. I consider that capability to be an improvment regarding auditability of the dispensing process.
+Limits array has been implemente as a bidimentional combined sized array, dinamyc in years and fixed is months. Considering that there ar no certainty about the number of years that could be needed, but it is well known that every single year should use all available months.
+All artimethics are acalulated using SafeMath library in order to avoid overflows. 
 
 ## Finalizing the dispensing period
 A beneficiary can only interact with the contract using calimFunds function. The dispensing period can be finalazid by owner, or in the normal case it will terminate just because of beneficiary runing claimFunds ot the period. Dispenser contrac checks how much time passed between contract creation time and current function execution. That way, when dispenser detects the feris claiming funds out of time, it just finilaze the contract and transfers all remaining DSP to beneficiary.  
