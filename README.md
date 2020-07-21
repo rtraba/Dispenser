@@ -26,8 +26,8 @@ Dispensing period ends at the begining of the first month of the year 29, from t
 ## Monetary Policy Consistency check
 At Dispenser creation time, its constructor executes the *populateLimits* process. As you can see, only the first four years are hardcoded with limits progression, and starting on year 5 it takes place what I call "satoshiMonetaryPolicy". SatoshiMonetaryPolicy just means: downsize the limits by a halv,one time each 4 years... and stop when the monthly limits cross the stopThresholdLimit. 
 As this is a parameters dependent process, there are combinations between DSP capp and stopThresholdLimit tha can be considered *inconsistent* resulting in a Dispensing period accepting claimingfunds even if all the capp has been already distributed.
-This solution has been implemented to prevent inconsistent deployments. If you try to deploy with DSP cap to small or a dispensing period to large, or stopThresholdLimit inadequate, the deploymnet transaction will be reverted and the contract won't be created.
-This means you can also use thi contract for deploying diferent dispensing periodsn and work on diferen dispensed tokens.
+This solution has been implemented to prevent inconsistent deployments. If you try to deploy with DSP cap too small or a dispensing period too large, or stopThresholdLimit inadequate, the deploymnet transaction will be reverted and the contract won't be created.
+This means you can also use thes contract for deploying diferent dispensing periods and work on diferen dispensed tokens.
 
 ## Design decisions
 The initial requirements for unlocking shcedule has been very precise. There are not requirements or previsibility for changing that schedule or the token or the beneficiary address. This solutions is being deployed for demonstrations porpouses only.
